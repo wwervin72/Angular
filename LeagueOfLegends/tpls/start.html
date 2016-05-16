@@ -1,0 +1,37 @@
+<div class="row" ng-controller="loginCtrl">
+  <div class="col-sm-8 col-sm-offset-1">
+    <form class="form-horizontal" name="loginForm">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <label for="uname" class="control-label">用户名：</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" ng-model="uname" name="uname" id="uname"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-8 col-sm-offset-4">
+          <span class="text-danger" ng-show="unameIsEmpty">请输入用户名！！！</span>
+          <span class="text-danger" ng-show="upwdIsEmpty">请输入密码！！！</span>
+          <span class="text-danger" ng-show="unameNotExist">该用户名不存在！！！</span>
+          <span class="text-danger" ng-show="loginFalse">密码输入不正确！！！</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4">
+          <label for="upwd" class="control-label">密码：</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" ng-model="upwd" name="upwd" id="upwd"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-4">
+          <button class="btn btn-success" ng-click="login()" id="login">登录</button>
+          <button class="btn btn-info" ui-sref="register()">注册</button>
+          <button class="btn btn-info" ui-sref="find()">找回密码</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

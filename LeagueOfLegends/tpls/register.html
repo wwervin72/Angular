@@ -1,0 +1,76 @@
+<form name="regForm" id="regForm" class="form-horizontal" novalidate ng-controller="registerCtrl">
+  <div class="form-group">
+    <div class="col-sm-2">
+      <label for="userName" class="control-label">用户名：</label>
+    </div>
+    <div class="col-sm-5">
+      <input type="text" id="userName" ng-model="userName" name="userName" class="form-control" required ng-pattern="/^[a-zA-Z]\d{3,8}$/"/>
+    </div>
+    <div class="col-sm-5">
+      <span class="text-danger" ng-show="regForm.userName.$dirty&&regForm.userName.$error.required">用户名不能为空！！！</span>
+      <span class="text-danger" ng-show="!regForm.userName.$error.required&&regForm.userName.$invalid">请输入以一个字母开始三到八个数字结尾的组合！！！</span>
+      <span class="text-danger" ng-show="userNameExist">该用户名已被占用！！！</span>
+      <span class="text-success" ng-show="!userNameExist&&regForm.userName.$valid">该用户名可以使用！！！</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <label for="userPwd" class="control-label">密码：</label>
+    </div>
+    <div class="col-sm-5">
+      <input type="password" class="form-control" ng-model="userPwd" id="userPwd" name="userPwd" required ng-pattern="/^[a-zA-Z0-9]{5,12}$/"/>
+    </div>
+    <div class="col-sm-5">
+      <span class="text-danger" ng-show="regForm.userPwd.$dirty&&regForm.userPwd.$error.required">密码不能为空！！！</span>
+      <span class="text-danger" ng-show="!regForm.userPwd.$error.required&&regForm.userPwd.$invalid">请输入五到十二个字母或数字的组合！！！</span>
+      <span class="text-success" ng-show="regForm.userPwd.$valid">密码格式正确！！！</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <label for="rePwd" class="control-label">重复密码：</label>
+    </div>
+    <div class="col-sm-5">
+      <input type="password" name="rePwd" id="rePwd" ng-model="rePwd" class="form-control" required ng-pattern="/^[a-zA-Z0-9]{5,12}$/"/>
+    </div>
+    <div class="col-sm-5">
+      <span class="text-danger" ng-show="regForm.rePwd.$dirty&&regForm.rePwd.$error.required">密码不能为空！！！</span>
+      <span class="text-danger" ng-show="!regForm.rePwd.$error.required&&rePwd!==userPwd">两次输入的密码不一致！！！</span>
+      <span class="text-success" ng-show="!regForm.rePwd.$error.required&&rePwd===userPwd">重复密码输入正确！！！</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <label for="userCode" class="control-label">身份证：</label>
+    </div>
+    <div class="col-sm-5">
+      <input type="text" id="userCode" name="userCode" ng-model="userCode" class="form-control" required ng-pattern="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/"/>
+    </div>
+    <div class="col-sm-5">
+      <span class="text-danger" ng-show="regForm.userCode.$dirty&&regForm.userCode.$error.required">身份证不能为空！！！</span>
+      <span class="text-danger" ng-show="!regForm.userCode.$error.required&&regForm.userCode.$invalid">身份证格式不正确！！！</span>
+      <span class="text-success" ng-show="regForm.userCode.$valid">该身份证可以使用！！！</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <label for="userPhone" class="control-label">手机号：</label>
+    </div>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" ng-model="userPhone" id="userPhone" name="userPhone" required ng-pattern="/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/"/>
+    </div>
+    <div class="col-sm-5">
+      <span class="text-danger" ng-show="regForm.userPhone.$dirty&&regForm.userPhone.$error.required">手机号码不能为空！！！</span>
+      <span class="text-danger" ng-show="!regForm.userPhone.$error.required&&regForm.userPhone.$invalid">手机格式不正确！！！</span>
+      <span class="text-success" ng-show="regForm.userPhone.$valid">该手机号码可以使用！！！</span>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-8 col-sm-offset-2">
+      <button class="btn btn-success"  ng-click="register()" ng-disabled="userNameExist||regForm.$invalid">注册</button>
+      <button ui-sref="index()" class="btn btn-success">返回登录</button>
+    </div>
+  </div>
+</form>

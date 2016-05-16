@@ -1,0 +1,82 @@
+<form class="form-horizontal" id="addHeroForm" name="addForm" ng-controller="addHero">
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="heroName" class="control-label">英雄名：</label>
+        </div>
+        <div class="col-sm-5">
+            <input type="text" id="heroName" placeholder="请输入英雄名..." ng-model="heroName" class="form-control" name="heroName" required ng-pattern="/^[\u4e00-\u9fa5]+[-]*$/"/>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-danger" ng-show="addForm.heroName.$dirty&&addForm.heroName.$error.required">英雄名不能为空!!!</span>
+            <span class="text-danger" ng-show="!addForm.heroName.$error.required&&addForm.heroName.$invalid">请输入以汉字开头任一个'-'的组合！！！</span>
+            <span class="text-success" ng-show="addForm.heroName.$valid">该名称可以使用！！！</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="alias" class="control-label">别名：</label>
+        </div>
+        <div class="col-sm-5">
+            <input type="text" id="alias" placeholder="请输入英雄别名..." ng-model="alias" class="form-control" name="alias" required ng-pattern="/^[a-zA-Z\u4e00-\u9fa5]+$/"/>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-danger" ng-show="addForm.alias.$dirty&&addForm.alias.$error.required">别名不能为空！！！</span>
+            <span class="text-danger" ng-show="!addForm.alias.$error.required&&addForm.alias.$invalid">请输入字母或者汉字！！！</span>
+            <span class="text-success" ng-show="addForm.alias.$valid">该别名可以使用！！！</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="position" class="control-label">英雄定位：</label>
+        </div>
+        <div class="col-sm-5">
+            <select name="position" id="position" ng-model="position" ng-options="x for x in positionArr" class="form-control" required>
+                <option value="">请选择</option>
+            </select>
+        </div>
+        <span class="text-danger" ng-show="addForm.position.$dirty&&!position">英雄定位不能为空！！！</span>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="equip" class="control-label">推荐装备：</label>
+        </div>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="equip" name="equip" ng-model="equip" placeholder="请输入推荐装备..." required ng-pattern="/^[\u4e00-\u9fa5]+、*/"/>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-danger" ng-show="addForm.equip.$dirty&&addForm.equip.$error.required">推荐装备不能为空！！！</span>
+            <span class="text-danger" ng-show="!addForm.equip.$error.required&&addForm.equip.$invalid">请输入以汉字开头任一个'、'的组合！！！</span>
+            <span class="text-success" ng-show="addForm.equip.$valid">输入正确！！！</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="skills" class="control-label">对线技巧：</label>
+        </div>
+        <div class="col-sm-5">
+            <textarea name="skills" id="skills" cols="60" rows="5" ng-model="skills" required placeholder="请输入对线技巧..."></textarea>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-danger" ng-show="addForm.skills.$dirty&&addForm.skills.$error.required">对线技巧不能为空！！！</span>
+            <span class="text-success" ng-show="addForm.skills.$valid">输入正确！！！</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="story" class="control-label">背景故事：</label>
+        </div>
+        <div class="col-sm-5">
+            <textarea name="story" id="story" cols="60" rows="5" ng-model="stroy" placeholder="请输入背景故事..." required></textarea>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-danger" ng-show="addForm.story.$dirty&&addForm.story.$error.required">背景故事不能为空！！！</span>
+            <span class="text-success" ng-show="addForm.story.$valid">输入正确！！！</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-5 col-sm-offset-3">
+            <button class="btn btn-success" ng-disabled="addForm.$invalid" ng-click="addHero()">添加</button>
+            <button class="btn btn-default" ui-sref="main({positionType:0})">返回列表</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,20 @@
+<div ng-controller="listCtrl">
+  <div class="row">
+    <div class="col-sm-3">
+      <button class="btn btn-success" ui-sref="addHero()">添加英雄</button>
+      <button class="btn btn-warning" ui-sref="index()">退出</button>
+    </div>
+    <div class="col-sm-9">
+      <form class="form-horizontal">
+        <input type="text" ng-model="filterOptions.filterText" placeholder="请输入查询关键字..." class="form-control searchText"/>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="gridStyle" ng-grid="gridOptions">
+
+      </div>
+    </div>
+  </div>
+</div>
