@@ -26,6 +26,22 @@
         </div>
       </div>
       <div class="form-group">
+        <div class="col-sm-8 col-sm-offset-4">
+             <div class="input-group col-sm-5">
+              <s class="input-group-addon">
+                <input type="checkbox" id="remPwdChk" ng-checked="infoChecked"/>
+              </s>
+              <input type="button" id="remPwdBtn" class="form-control" value="记住密码" ng-click="rememberInfo('#remPwdChk')"/>
+            </div>
+            <div class="input-group col-sm-5">
+              <s class="input-group-addon">
+                <input type="checkbox" id="autoLoginChk" ng-checked="checked"/>
+              </s>
+              <input type="button" id="autoLoginBtn" class="form-control" value="自动登录" ng-click="rememberInfo('#autoLoginChk')"/>
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-10 col-sm-offset-4">
           <button class="btn btn-success" ng-click="login()" id="login">登录</button>
           <button class="btn btn-info" ui-sref="register()">注册</button>

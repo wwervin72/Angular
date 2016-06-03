@@ -4,21 +4,35 @@
 //登录模块
 var loginModel = angular.module('loginModel',[]);
 loginModel.controller('loginCtrl',['$scope','$http','$location', function ($scope, $http,$location) {
-  $scope.uname = '';
-  $scope.upwd = '';
-  $scope.login = function () {
-    if(!$scope.uname){
-      $scope.unameIsEmpty = true;
-      $scope.upwdIsEmpty = false;
-    }else if($scope.uname&&!$scope.upwd){
-      $scope.unameIsEmpty = false;
-      $scope.upwdIsEmpty = true;
-      $scope.loginFalse = false;
-    }else{
-      $scope.unameIsEmpty = false;
-      $scope.upwdIsEmpty = false;
-      $http.get('data/login.php?handle=login&uname='+$scope.uname+'&upwd='+$scope.upwd).success(function (res) {
-        if(res==='true')$location.url('main0');  //跳转
+
+  $scope.uname = localStorage.getItem('userName') || '';
+  $scope.upwd = localStorage.getItem('userPwd') || '';
+  $scope.checked = localStorage.getItem('autoLogin');
+  localStorage.getItem('userName') && ($scope.infoChecked = true);
+  $scope.rememberInfo = function (chk) {
+    var checked = !$(chk).prop('checked');
+    $(chk).prop('checked', checked);
+  }
+  if($scope.infoChecked && $scope.checked){  //自动登录
+    $location.url('main0');
+  }
+  $scope.checkUserInfo = function () {
+    $http.get('data/login.php?handle=login&uname='+$scope.uname+'&upwd='+$scope.upwd).success(function (res) {
+        if(res==='true'){
+          if($('#remPwdChk').prop('checked')){  //记住密码
+            localStorage.setItem('userName', $scope.uname);
+            localStorage.setItem('userPwd', $scope.upwd);
+          }else{
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userPwd');
+          }
+          if($('#autoLoginChk').prop('checked')){
+            localStorage.setItem('autoLogin', true);
+          }else{
+            localStorage.removeItem('autoLogin', true);
+          }
+          $location.url('main0');  //跳转
+        }
         else if(res==='该用户名不存在'){
           $scope.loginFalse = false;
           $scope.unameNotExist=true;
@@ -31,6 +45,19 @@ loginModel.controller('loginCtrl',['$scope','$http','$location', function ($scop
       }).error(function (res) {
         alert('请求错误');
       })
+  }
+  $scope.login = function () {
+    if(!$scope.uname){
+      $scope.unameIsEmpty = true;
+      $scope.upwdIsEmpty = false;
+    }else if($scope.uname&&!$scope.upwd){
+      $scope.unameIsEmpty = false;
+      $scope.upwdIsEmpty = true;
+      $scope.loginFalse = false;
+    }else{
+      $scope.unameIsEmpty = false;
+      $scope.upwdIsEmpty = false;
+      $scope.checkUserInfo();
     }
   };
 }])
@@ -162,7 +189,10 @@ loginModel.controller('registerCtrl',['$scope','$http','$location','requestServi
 
 //列表模块
 var listModel = angular.module('listModel',['ngGrid']);
-listModel.controller('listCtrl',['$scope','$http','$state','$stateParams', function ($scope, $http, $state, $stateParams) {
+listModel.controller('listCtrl',['$scope','$http','$state','$stateParams', '$location', function ($scope, $http, $state, $stateParams, $location) {
+  $scope.breakLogin = function () {
+    localStorage.removeItem('autoLogin');
+  }
 
   $scope.pagingOptions = {
     pageSizes: [5,15,20],

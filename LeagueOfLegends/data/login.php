@@ -2,7 +2,7 @@
 	header("content-type:application/json;charset=utf8");
 
 	$handle=$_REQUEST['handle'];
-	$conn=mysqli_connect('127.0.0.1','root','root','lol','3306');
+	$conn=mysqli_connect('127.0.0.1','root','','lol','3306');
 	$sql='SET NAMES utf8';
 	mysqli_query($conn,$sql);
 	$r='';

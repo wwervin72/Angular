@@ -2,6 +2,7 @@ body{
   background: url("../img/timo.jpg");
   background-size: cover;
   font: 14px 'Microsoft yahei';
+  box-sizing: border-box;
 }
 *{
   margin: 0;
@@ -11,6 +12,9 @@ body{
 ul{
   list-style: none;
   padding-left: 40px;
+}
+input, button{
+  outline: none;
 }
 .container{
   padding-top: 60px;
@@ -122,4 +126,13 @@ a.list-group-item{
 }
 textarea{
   text-indent: 2em;
+}
+.input-group input[type="button"]{
+  line-height: 36px;
+}
+.input-group s{
+  border-radius: 5px;
+}
+.input-group:last-child{
+  float: right;
 }

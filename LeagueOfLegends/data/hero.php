@@ -1,6 +1,6 @@
 <?php
 	header('content-type:application/json;charset=utf-8');
-	$conn=mysqli_connect('127.0.0.1','root','root','lol','3306');
+	$conn=mysqli_connect('127.0.0.1','root','','lol','3306');
 	$sql='SET NAMES utf8';
 	mysqli_query($conn,$sql);
 	$tp=$_REQUEST['param'];
